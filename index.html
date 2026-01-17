@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miku Fan Page</title>
+    <style>
+        /* Mia's Special Design Settings */
+        :root {
+            --miku-teal: #86D2D9;
+            --miku-dark: #3D4E5E;
+            --bg-light: #F0F7F8;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: var(--miku-dark);
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        /* The Big Hero Banner */
+        .hero-banner {
+            background-color: var(--miku-teal);
+            border-radius: 40px; /* Those super rounded corners! */
+            padding: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--miku-dark);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .hero-text h1 { font-size: 3rem; margin: 0; }
+        .hero-text p { max-width: 400px; opacity: 0.8; }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: var(--white);
+            color: black;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* Content Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .search-item {
+            background: #e0f2f3;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <span>Home</span>
+        <span>Search</span>
+        <span>Message</span>
+    </nav>
+
+    <div class="hero-banner">
+        <div class="hero-text">
+            <h1>Miku</h1>
+            <p>Miku is a world-famous virtual singer. This is a design inspired by the screenshot you showed me!</p>
+            <a href="page2.html" class="read-more">Read More</a>
+        </div>
+        <div style="font-size: 100px;">🎶</div> 
+    </div>
+
+    <div class="grid-container">
+        <div class="card">
+            <h3>Artwork ></h3>
+            <div style="background: #ddd; height: 150px; border-radius: 20px;"></div>
+        </div>
+
+        <div class="card">
+            <h3>Recent Search</h3>
+            <div class="search-item">🔍 Hatsune miku is mine</div>
+            <div class="search-item" style="background: var(--miku-teal);">🔍 Hatsune miku icon</div>
+            <div class="search-item" style="background: var(--miku-dark); color: white;">🔍 Miku expo 2025</div>
+        </div>
+
+        <div class="card">
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="font-size: 2rem; color: var(--miku-teal); font-weight: bold;">01</span>
+                <div><strong>The Number</strong><br><small>Hatsune Miku 01</small></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
