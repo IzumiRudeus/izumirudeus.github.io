@@ -1,1 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Control Center</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; }
+        h1 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Admin Control Center!</h1>
+    <p>This page is for administrators only.</p>
+    <p>Here you can manage website content, view user data, etc.</p>
 
+    <!-- This script is for the logout functionality -->
+    <script>
+        // Simple "logout" by redirecting back to the login page
+        function logout() {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <button onclick="logout()">Logout</button>
+</body>
+</html>
