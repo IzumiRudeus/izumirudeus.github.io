@@ -13,15 +13,20 @@
 <body>
     <div class="login-container">
         <h1>Admin Access</h1>
-        <!-- The form uses onsubmit="return false;" to prevent the page from reloading -->
+        <!-- Make sure this form tag is correct -->
         <form id="login-form" onsubmit="return false;">
+            
+            <!-- Check the input tag -->
             <input type="password" id="password-input" placeholder="Enter Password">
             <br>
+            
+            <!-- THIS IS THE BUTTON. Check this tag very carefully! -->
             <button type="submit" id="login-button">Login</button>
-        </form>
+
+        </form> <!-- Make sure the form tag is closed -->
     </div>
 
-    <!-- Link to our JavaScript file -->
+    <!-- The script tag should be at the end, just before </body> -->
     <script src="script.js"></script>
 </body>
 </html>
