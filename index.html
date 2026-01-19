@@ -1,14 +1,83 @@
-<a href="https://youtu.be/xvFZjo5PgG0?si=RbaN3fv95EGihYPy" target="_blank">Do not Redeeem !</a> 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-body {
-  background-image: url('https://i.pinimg.com/736x/c7/ff/d4/c7ffd4c74f119b010069a1882f9ad998.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;  
-  background-size: cover;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            /* Set a min-height to ensure the background is visible even with little content */
+            min-height: 100%; 
+            font-family: sans-serif;
+        }
+        
+        body {
+            /* 1. Set the background image URL */
+            background-image: url('https://i.pinimg.com/736x/fb/e9/00/fbe900d7cfcbba0cb0e09757ab957f4f.jpg');
+            
+            /* 
+             *  === FIX #1: SHOW THE WHOLE IMAGE ===
+             *  'contain' makes sure the entire image is always visible.
+             *  It will be scaled down to fit, but never cropped.
+             */
+            background-size: contain;
+            
+            /* Center the contained image on the screen */
+            background-position: center center;
+            
+            /* 
+             *  === FIX #2: MAKE THE BACKGROUND SCROLL ===
+             *  'scroll' is the default behavior. It makes the background
+             *  image move along with the page content when you scroll.
+             */
+            background-attachment: scroll;
+
+            /* This prevents the image from tiling if the user's screen is very large */
+            background-repeat: no-repeat;
+            
+            /* The black background will seamlessly fill any empty space around the image */
+            background-color: #000000;
+        }
+
+        /* Styles for the example content to make it readable */
+        .content {
+            background-color: rgba(255, 255, 255, 0.1); /* Lighter overlay for contrast */
+            backdrop-filter: blur(5px); /* Optional: nice blur effect */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 2rem;
+            margin: 10vh 10%; /* More vertical margin */
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        /* This div is just to make the page long enough to scroll */
+        .long-content {
+            height: 150vh;
+        }
+        
+    </style>
 </head>
 <body>
+
+    <!-- Your website content goes here -->
+    <div class="content">
+        <h1>Welcome!</h1>
+        <p>The full background image is now visible and scrolls with the page.</p>
+    </div>
+
+    <!-- This div is just to make the page long enough to scroll and see the effect -->
+    <div class="long-content"></div>
+    
+    <div class="content">
+        <h2>More Content</h2>
+        <p>As you scroll down, the image moves with you.</p>
+    </div>
+
+
+</body>
+</html>
