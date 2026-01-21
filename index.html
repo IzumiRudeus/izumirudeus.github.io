@@ -15,43 +15,71 @@
         }
         
         body {
-            /* This is the DEFAULT background. It will be overridden by JavaScript if a custom one is set. */
             background-image: url('https://i.imgur.com/83pL3eP.jpeg');
             background-size: contain;
             background-position: center center;
             background-attachment: scroll;
             background-repeat: no-repeat;
             background-color: #000000;
-            
-            /* Performance hint for smoother scrolling */
             will-change: transform;
         }
 
-        /* Styles for the example content to make it readable */
         .content {
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             padding: 2rem;
-            margin: 10vh 10%;
+            margin: 10vh 10%; /* Default margin for larger screens */
             border-radius: 15px;
             text-align: center;
         }
+        
+        /* Moved the Admin Link style here from inline for better management */
+        .admin-link {
+            color: white;
+            font-size: 1.5rem; /* Default size for larger screens */
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            text-decoration: none; /* Looks cleaner */
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.2s;
+        }
+        .admin-link:hover {
+            border-bottom: 2px solid white;
+        }
 
-        /* This div is just to make the page long enough to scroll */
         .long-content {
             height: 150vh;
         }
         
+        /* ======================================================= */
+        /*     RESPONSIVE STYLES FOR MOBILE DEVICES              */
+        /* ======================================================= */
+        /* These styles apply only if the screen width is 768px or less */
+        @media (max-width: 768px) {
+            .content {
+                /* Reduce side margins on mobile */
+                margin: 10vh 5%; 
+                padding: 1.5rem;
+            }
+
+            .admin-link {
+                /* Make the link smaller and closer to the corner */
+                font-size: 1.1rem;
+                top: 15px;
+                right: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Link to your Admin Login page -->
-    <a href="login.html" style="color: white; font-size: 1.5rem; position: fixed; top: 20px; right: 20px; z-index: 100;">Admin Login</a>
+    <!-- The link now uses a class instead of inline style -->
+    <a href="login.html" class="admin-link">Admin Login</a>
 
-    <!-- Your website content goes here -->
     <div class="content">
         <h1>Welcome!</h1>
         <p>The full background image is now visible and scrolls with the page.</p>
@@ -64,34 +92,19 @@
         <p>As you scroll down, the image moves with you.</p>
     </div>
 
-
-    <!-- ======================================================= -->
-    <!--     MORE ROBUST SCRIPT TO HANDLE CUSTOM BACKGROUND    -->
-    <!-- ======================================================= -->
+    <!-- Your robust script for the background remains the same -->
     <script>
-        // This code runs as soon as the page loads
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Use a try...catch block to safely access localStorage.
             try {
-                // TRY to get the item from localStorage
                 const savedUrl = localStorage.getItem('websiteBackgroundImage');
-
-                // If a custom URL was successfully retrieved...
                 if (savedUrl) {
-                    // ...apply the custom styles.
                     document.body.style.backgroundImage = `url('${savedUrl}')`;
                     document.body.style.backgroundSize = 'contain'; 
                     document.body.style.backgroundAttachment = 'scroll';
                     document.body.style.backgroundPosition = 'center center';
                     document.body.style.backgroundRepeat = 'no-repeat';
                 }
-                // If savedUrl is null (no custom background set), this block is skipped
-                // and the default CSS background is used automatically.
-
             } catch (e) {
-                // If TRYING to access localStorage fails (e.g., in private mode),
-                // CATCH the error and log it to the console. The page will just use
-                // the default CSS background, preventing a crash.
                 console.error("Could not access localStorage. This may be due to private browsing mode.", e);
             }
         });
