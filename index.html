@@ -6,71 +6,50 @@
     <title>My Website</title>
     
     <style>
+        /* Your original CSS remains here */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
-            /* Set a min-height to ensure the background is visible even with little content */
             min-height: 100%; 
             font-family: sans-serif;
         }
         
         body {
-            /* 1. Set the background image URL */
-            background-image: url('https://i.pinimg.com/736x/fb/e9/00/fbe900d7cfcbba0cb0e09757ab957f4f.jpg');
-            
-            /* 
-             *  === FIX #1: SHOW THE WHOLE IMAGE ===
-             *  'contain' makes sure the entire image is always visible.
-             *  It will be scaled down to fit, but never cropped.
-             */
+            /* This is now the DEFAULT background. It will be overridden by JavaScript if a custom one is set. */
+            background-image: url('https://i.imgur.com/83pL3eP.jpeg');
             background-size: contain;
-            
-            /* Center the contained image on the screen */
             background-position: center center;
-            
-            /* 
-             *  === FIX #2: MAKE THE BACKGROUND SCROLL ===
-             *  'scroll' is the default behavior. It makes the background
-             *  image move along with the page content when you scroll.
-             */
             background-attachment: scroll;
-
-            /* This prevents the image from tiling if the user's screen is very large */
             background-repeat: no-repeat;
-            
-            /* The black background will seamlessly fill any empty space around the image */
             background-color: #000000;
         }
 
-        /* Styles for the example content to make it readable */
+        /* ... all your other styles for .content, etc. ... */
         .content {
-            background-color: rgba(255, 255, 255, 0.1); /* Lighter overlay for contrast */
-            backdrop-filter: blur(5px); /* Optional: nice blur effect */
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             padding: 2rem;
-            margin: 10vh 10%; /* More vertical margin */
+            margin: 10vh 10%;
             border-radius: 15px;
             text-align: center;
         }
-
-        /* This div is just to make the page long enough to scroll */
-        .long-content {
-            height: 150vh;
-        }
+        .long-content { height: 150vh; }
         
     </style>
 </head>
 <body>
 
     <!-- Your website content goes here -->
+    <a href="login.html" style="color: white; font-size: 1.5rem; position: fixed; top: 20px; right: 20px;">Admin Login</a>
+
     <div class="content">
         <h1>Welcome!</h1>
         <p>The full background image is now visible and scrolls with the page.</p>
     </div>
 
-    <!-- This div is just to make the page long enough to scroll and see the effect -->
     <div class="long-content"></div>
     
     <div class="content">
@@ -79,7 +58,26 @@
     </div>
 
 
+    <!-- ======================================================= -->
+    <!-- ADD THIS SCRIPT TO CHECK FOR A CUSTOM BACKGROUND        -->
+    <!-- ======================================================= -->
+    <script>
+        // This code runs as soon as the page content has loaded
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // 1. Check localStorage to see if a custom URL was saved
+            const savedUrl = localStorage.getItem('websiteBackgroundImage');
+
+            // 2. If a URL was found...
+            if (savedUrl) {
+                // 3. ...change the body's background image style directly!
+                document.body.style.backgroundImage = `url('${savedUrl}')`;
+                
+                // Optional: You might want to change other properties too
+                document.body.style.backgroundSize = 'cover'; // 'cover' often works better for random images
+                document.body.style.backgroundAttachment = 'fixed'; // Make it a fixed parallax effect
+            }
+        });
+    </script>
+
 </body>
 </html>
-
-<a href="login.html" style="color: white; font-size: 1.5rem; position: fixed; top: 20px; right: 20px;">Admin Login</a>
