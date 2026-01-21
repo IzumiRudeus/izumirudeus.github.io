@@ -6,7 +6,6 @@
     <title>My Website</title>
     
     <style>
-        /* Your original CSS remains here */
         html, body {
             margin: 0;
             padding: 0;
@@ -16,16 +15,19 @@
         }
         
         body {
-            /* This is now the DEFAULT background. It will be overridden by JavaScript if a custom one is set. */
+            /* This is the DEFAULT background. It will be overridden by JavaScript if a custom one is set. */
             background-image: url('https://i.imgur.com/83pL3eP.jpeg');
             background-size: contain;
             background-position: center center;
             background-attachment: scroll;
             background-repeat: no-repeat;
             background-color: #000000;
+            
+            /* Performance hint for smoother scrolling */
+            will-change: transform;
         }
 
-        /* ... all your other styles for .content, etc. ... */
+        /* Styles for the example content to make it readable */
         .content {
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
@@ -36,15 +38,20 @@
             border-radius: 15px;
             text-align: center;
         }
-        .long-content { height: 150vh; }
+
+        /* This div is just to make the page long enough to scroll */
+        .long-content {
+            height: 150vh;
+        }
         
     </style>
 </head>
 <body>
 
-    <!-- Your website content goes here -->
-    <a href="login.html" style="color: white; font-size: 1.5rem; position: fixed; top: 20px; right: 20px;">Admin Login</a>
+    <!-- Link to your Admin Login page -->
+    <a href="login.html" style="color: white; font-size: 1.5rem; position: fixed; top: 20px; right: 20px; z-index: 100;">Admin Login</a>
 
+    <!-- Your website content goes here -->
     <div class="content">
         <h1>Welcome!</h1>
         <p>The full background image is now visible and scrolls with the page.</p>
@@ -59,22 +66,33 @@
 
 
     <!-- ======================================================= -->
-    <!-- ADD THIS SCRIPT TO CHECK FOR A CUSTOM BACKGROUND        -->
+    <!-- SCRIPT TO CHECK FOR A CUSTOM BACKGROUND (CORRECTED)   -->
     <!-- ======================================================= -->
     <script>
-        // This code runs as soon as the page content has loaded
+        // This code runs as soon as the page loads
         document.addEventListener('DOMContentLoaded', (event) => {
-            // 1. Check localStorage to see if a custom URL was saved
+            // 1. Check the browser's local storage to see if a custom URL was saved
             const savedUrl = localStorage.getItem('websiteBackgroundImage');
 
             // 2. If a URL was found...
             if (savedUrl) {
-                // 3. ...change the body's background image style directly!
+                // 3. ...change the body's background styles directly using JavaScript.
+                
+                // Set the new image URL
                 document.body.style.backgroundImage = `url('${savedUrl}')`;
                 
-                // Optional: You might want to change other properties too
-                document.body.style.backgroundSize = 'cover'; // 'cover' often works better for random images
-                document.body.style.backgroundAttachment = 'fixed'; // Make it a fixed parallax effect
+                // --- THESE ARE THE FIXES ---
+                // Ensure the custom image also respects your style preferences.
+                
+                // Set the size to 'contain' to show the whole image without cropping.
+                document.body.style.backgroundSize = 'contain'; 
+                
+                // Set the attachment to 'scroll' to make it move with the page.
+                document.body.style.backgroundAttachment = 'scroll';
+                
+                // Also set the other properties for consistency.
+                document.body.style.backgroundPosition = 'center center';
+                document.body.style.backgroundRepeat = 'no-repeat';
             }
         });
     </script>
