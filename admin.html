@@ -52,7 +52,6 @@
     <hr>
     
     <h2>Special Feature</h2>
-    <!-- The button text has been changed -->
     <button onclick="doNotTouch()" class="glass-btn">Do not touch</button>
     
     <hr>
@@ -68,49 +67,58 @@
 
     <button onclick="logout()" class="logout-btn">Logout and Return Home</button>
 
-    <!-- 
-        NOTE: All the old pop-up/modal HTML and CSS has been removed to keep the code clean.
-    -->
-
     <!-- ======================================================= -->
-    <!--            THE JAVASCRIPT THAT MAKES IT WORK          -->
+    <!--     THE FULLY UPDATED JAVASCRIPT WITH ERROR HANDLING  -->
     <!-- ======================================================= -->
     <script>
-        // --- NEW FUNCTION FOR THE "DO NOT TOUCH" BUTTON ---
+        // --- FUNCTION FOR THE "DO NOT TOUCH" BUTTON ---
         function doNotTouch() {
             const videoId = 'xvFZjo5PgG0';
             const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-            // Check if the user is on a mobile device by looking at the browser's user agent string
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             if (isMobile) {
                 alert("Redirecting you to the YouTube app...");
-                // On mobile, the OS will usually intercept this link and offer to open it in the app.
                 window.location.href = youtubeUrl;
             } else {
                 alert("Opening YouTube in a new tab...");
-                // On PC, open the link in a new browser tab.
                 window.open(youtubeUrl, '_blank');
             }
         }
         
-        // --- YOUR EXISTING FUNCTIONS ---
+        // --- ROBUST FUNCTION TO SAVE BACKGROUND ---
+        // It uses a try...catch block to handle errors if localStorage is disabled.
         function saveBackground() {
-            const newUrl = document.getElementById('bg-image-url').value;
-            if (newUrl) {
-                localStorage.setItem('websiteBackgroundImage', newUrl);
-                alert('Background URL saved! Refresh the homepage to see the change.');
-            } else {
-                alert('Please enter a URL first.');
+            try {
+                const newUrl = document.getElementById('bg-image-url').value;
+                if (newUrl) {
+                    localStorage.setItem('websiteBackgroundImage', newUrl);
+                    alert('Background URL saved! Refresh the homepage to see the change.');
+                } else {
+                    alert('Please enter a URL first.');
+                }
+            } catch (e) {
+                // This code runs if localStorage fails
+                alert('Error: Could not save settings. You might be in private browsing mode.');
+                console.error("Could not access localStorage.", e);
             }
         }
 
+        // --- ROBUST FUNCTION TO RESET BACKGROUND ---
+        // It also uses a try...catch block for safety.
         function resetBackground() {
-            localStorage.removeItem('websiteBackgroundImage');
-            alert('Background has been reset to default. Refresh the homepage.');
+            try {
+                localStorage.removeItem('websiteBackgroundImage');
+                alert('Background has been reset to default. Refresh the homepage.');
+            } catch (e) {
+                // This code runs if localStorage fails
+                alert('Error: Could not reset settings. You might be in private browsing mode.');
+                console.error("Could not access localStorage.", e);
+            }
         }
 
+        // --- STANDARD LOGOUT FUNCTION ---
         function logout() {
             alert("You have been logged out. Redirecting to the homepage.");
             window.location.href = 'index.html';
