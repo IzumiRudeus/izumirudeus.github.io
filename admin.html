@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Control Center</title>
     <style>
         body { 
@@ -10,10 +11,13 @@
             background-color: #e9e9e9;
         }
         h1, h2 { color: #333; }
-        input[type="text"] { width: 400px; padding: 0.5rem; }
+        input[type="text"] { 
+            width: 400px; /* Default width for large screens */
+            padding: 0.5rem; 
+            box-sizing: border-box; /* Important for 100% width later */
+        }
         hr { margin: 2rem 0; }
 
-        /* General Button Styles */
         button {
             padding: 0.75rem 1.5rem;
             font-size: 1rem;
@@ -22,31 +26,48 @@
             border: none;
             border-radius: 8px;
             margin-top: 1rem;
-            margin-right: 10px;
+            margin-right: 10px; /* Default for side-by-side */
             transition: transform 0.2s;
         }
         button:hover {
             transform: scale(1.05);
         }
 
-        /* --- STYLES FOR THE "DO NOT TOUCH" BUTTON --- */
         .glass-btn {
-            background: rgba(59, 130, 246, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(59, 130, 246, 0.5); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Standard button styles */
         .save-btn { background-color: #28a745; color: white; }
         .reset-btn { background-color: #ffc107; color: black; }
         .logout-btn { background-color: #dc3545; color: white; }
+        
+        /* ======================================================= */
+        /*     RESPONSIVE STYLES FOR ADMIN PANEL                 */
+        /* ======================================================= */
+        @media (max-width: 768px) {
+            body {
+                /* Less padding on small screens */
+                padding: 1rem;
+            }
+
+            input[type="text"] {
+                /* Make input take the full width */
+                width: 100%;
+            }
+
+            button {
+                /* Make all buttons stack vertically and take full width */
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to the Admin Control Center!</h1>
+    <h1>Admin Control Center</h1>
     <p>You are successfully logged in.</p>
     
     <hr>
@@ -67,17 +88,12 @@
 
     <button onclick="logout()" class="logout-btn">Logout and Return Home</button>
 
-    <!-- ======================================================= -->
-    <!--     THE FULLY UPDATED JAVASCRIPT WITH ERROR HANDLING  -->
-    <!-- ======================================================= -->
+    <!-- Your JavaScript with error handling remains the same -->
     <script>
-        // --- FUNCTION FOR THE "DO NOT TOUCH" BUTTON ---
         function doNotTouch() {
             const videoId = 'xvFZjo5PgG0';
             const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
             if (isMobile) {
                 alert("Redirecting you to the YouTube app...");
                 window.location.href = youtubeUrl;
@@ -87,8 +103,6 @@
             }
         }
         
-        // --- ROBUST FUNCTION TO SAVE BACKGROUND ---
-        // It uses a try...catch block to handle errors if localStorage is disabled.
         function saveBackground() {
             try {
                 const newUrl = document.getElementById('bg-image-url').value;
@@ -99,26 +113,21 @@
                     alert('Please enter a URL first.');
                 }
             } catch (e) {
-                // This code runs if localStorage fails
                 alert('Error: Could not save settings. You might be in private browsing mode.');
                 console.error("Could not access localStorage.", e);
             }
         }
 
-        // --- ROBUST FUNCTION TO RESET BACKGROUND ---
-        // It also uses a try...catch block for safety.
         function resetBackground() {
             try {
                 localStorage.removeItem('websiteBackgroundImage');
                 alert('Background has been reset to default. Refresh the homepage.');
             } catch (e) {
-                // This code runs if localStorage fails
                 alert('Error: Could not reset settings. You might be in private browsing mode.');
                 console.error("Could not access localStorage.", e);
             }
         }
 
-        // --- STANDARD LOGOUT FUNCTION ---
         function logout() {
             alert("You have been logged out. Redirecting to the homepage.");
             window.location.href = 'index.html';
