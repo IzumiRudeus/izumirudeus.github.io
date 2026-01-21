@@ -1,6 +1,6 @@
 // --- THIS IS THE INSECURE PART ---
 // The correct password is saved directly in the code.
-const CORRECT_PASSWORD = "your-secret-password-123";
+const CORRECT_PASSWORD = "izumirudeusnotfound";
 
 // Get the HTML elements we need to work with
 const loginButton = document.getElementById('login-button');
