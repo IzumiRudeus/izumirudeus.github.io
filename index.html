@@ -6,96 +6,61 @@
     <title>My Website</title>
     
     <style>
+        /* Your CSS is perfect, no changes needed here */
         html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100%; 
-            font-family: sans-serif;
+            margin: 0; padding: 0; width: 100%; min-height: 100%; font-family: sans-serif;
         }
-        
         body {
-            /* This is the DEFAULT background. It will be overridden by JavaScript if a custom one is set. */
             background-image: url('https://i.imgur.com/83pL3eP.jpeg');
-            background-size: contain;
-            background-position: center center;
-            background-attachment: scroll;
-            background-repeat: no-repeat;
-            background-color: #000000;
-            
-            /* Performance hint for smoother scrolling */
-            will-change: transform;
+            background-size: contain; background-position: center center;
+            background-attachment: scroll; background-repeat: no-repeat;
+            background-color: #000000; will-change: transform;
         }
-
-        /* Styles for the example content to make it readable */
         .content {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 2rem;
-            margin: 10vh 10%;
-            border-radius: 15px;
-            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2); color: white;
+            padding: 2rem; margin: 10vh 10%; border-radius: 15px; text-align: center;
         }
-
-        /* This div is just to make the page long enough to scroll */
-        .long-content {
-            height: 150vh;
-        }
-        
+        .long-content { height: 150vh; }
     </style>
 </head>
 <body>
-
-    <!-- Link to your Admin Login page -->
     <a href="login.html" style="color: white; font-size: 1.5rem; position: fixed; top: 20px; right: 20px; z-index: 100;">Admin Login</a>
 
-    <!-- Your website content goes here -->
     <div class="content">
         <h1>Welcome!</h1>
         <p>The full background image is now visible and scrolls with the page.</p>
     </div>
-
     <div class="long-content"></div>
-    
     <div class="content">
         <h2>More Content</h2>
         <p>As you scroll down, the image moves with you.</p>
     </div>
 
-
     <!-- ======================================================= -->
-    <!-- SCRIPT TO CHECK FOR A CUSTOM BACKGROUND (CORRECTED)   -->
+    <!--     MORE ROBUST SCRIPT TO HANDLE CUSTOM BACKGROUND    -->
     <!-- ======================================================= -->
     <script>
-        // This code runs as soon as the page loads
         document.addEventListener('DOMContentLoaded', (event) => {
-            // 1. Check the browser's local storage to see if a custom URL was saved
-            const savedUrl = localStorage.getItem('websiteBackgroundImage');
+            try {
+                // TRY to get the item from localStorage
+                const savedUrl = localStorage.getItem('websiteBackgroundImage');
 
-            // 2. If a URL was found...
-            if (savedUrl) {
-                // 3. ...change the body's background styles directly using JavaScript.
-                
-                // Set the new image URL
-                document.body.style.backgroundImage = `url('${savedUrl}')`;
-                
-                // --- THESE ARE THE FIXES ---
-                // Ensure the custom image also respects your style preferences.
-                
-                // Set the size to 'contain' to show the whole image without cropping.
-                document.body.style.backgroundSize = 'contain'; 
-                
-                // Set the attachment to 'scroll' to make it move with the page.
-                document.body.style.backgroundAttachment = 'scroll';
-                
-                // Also set the other properties for consistency.
-                document.body.style.backgroundPosition = 'center center';
-                document.body.style.backgroundRepeat = 'no-repeat';
+                if (savedUrl) {
+                    // If it exists, apply the styles
+                    document.body.style.backgroundImage = `url('${savedUrl}')`;
+                    document.body.style.backgroundSize = 'contain'; 
+                    document.body.style.backgroundAttachment = 'scroll';
+                    document.body.style.backgroundPosition = 'center center';
+                    document.body.style.backgroundRepeat = 'no-repeat';
+                }
+            } catch (e) {
+                // If TRYING to access localStorage fails (e.g., in private mode),
+                // CATCH the error and log it to the console. The page will just use
+                // the default CSS background, which is what we want.
+                console.error("Could not access localStorage. This may be due to private browsing mode.", e);
             }
         });
     </script>
-
 </body>
 </html>
